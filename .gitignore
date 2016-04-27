@@ -1,0 +1,7 @@
+# Git ignore file
+
+# Python stuffs
+__pycache__/
+*.py[cod]
+venv/
+
