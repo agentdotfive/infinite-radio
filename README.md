@@ -19,7 +19,7 @@ To activate the python3 virtual environment, run:
 
 To install the build requirements in the virtual environment:
 
-- (Linux/OSX/Windows) ```> pip install -r venv_requirements.txt```
+- (Linux/OSX/Windows) ```> pip install -r python3_requirements.txt```
 
 To deactivate:
 

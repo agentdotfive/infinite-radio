@@ -1,0 +1,7 @@
+language: python
+python:
+  - "3.4"
+# command to install dependencies
+install: "pip install -r python3_requirements.txt"
+# command to run tests
+script: ./dev_tools/run_unit_tests.sh
