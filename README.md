@@ -21,8 +21,11 @@ To install the build requirements in the virtual environment:
 
 - (Linux/OSX/Windows) ```> pip install -r python3_requirements.txt```
 
+To save new build requirements from the virtual environment:
+
+- (Linux/OSX) ```> pip freeze > python3_requirements.txt```
+
 To deactivate:
 
 ```> deactivate```
-
 

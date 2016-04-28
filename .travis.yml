@@ -7,4 +7,6 @@ python:
 # command to install dependencies
 install: "pip install -r python3_requirements.txt"
 # command to run tests
-script: ./dev_tools/run_unit_tests.sh
+script:
+  - ./dev_tools/git_hooks/pre-commit 
+  - ./dev_tools/run_unit_tests.sh
