@@ -34,7 +34,7 @@ class TestAPI(unittest.TestCase):
         metagraph = MockMetagraph([list(range(0, 10)),
                                    list(range(10, 20))])
 
-        metaserver = infradio.create_metaserver(metagraph)
+        metaserver = infradio.MetaServer(metagraph)
         metastream_a = metaserver.new_metastream()
         metastream_b = metaserver.new_metastream()
 
