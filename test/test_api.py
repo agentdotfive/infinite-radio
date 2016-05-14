@@ -22,24 +22,20 @@ class MockMetagraph:
 
 class TestAPI(unittest.TestCase):
 
-    def test_hello_world(self):
-        self.assertEqual(infradio.hello_world(), 0)
-
-    def test_new_stream(self):
-
-        # TODO: Turn back on
-        if True:
-            return
+    def test_new_streams(self):
 
         metagraph = MockMetagraph([list(range(0, 10)),
                                    list(range(10, 20))])
 
-        metaserver = infradio.MetaServer(metagraph)
-        metastream_a = metaserver.new_metastream()
-        metastream_b = metaserver.new_metastream()
+        metaserver = infradio.MetaServer(metagraph, 0)
+        stream_a = metaserver.new_stream()
+        stream_b = metaserver.new_stream()
 
         for i in range(0, 10):
-            _, _, j = metastream_a.next()
+            _, _, j = stream_a.next()
             self.assertEqual(i, j)
-            _, _, k = metastream_b.next()
+            _, _, k = stream_b.next()
             self.assertEqual(i, k + 10)
+
+        self.assertEqual(stream_a.history, list(range(0, 10)))
+        self.assertEqual(stream_b.history, list(range(10, 20)))
