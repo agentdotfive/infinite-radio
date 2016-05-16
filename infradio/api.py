@@ -1,7 +1,7 @@
 
 """Infinite Radio API"""
 
-import metagraph
+from . import metagraph
 
 import random
 import uuid
@@ -21,7 +21,7 @@ class MetaStream:
         self.position = self.position + 1
 
         while self.position >= len(self.path.nodes):
-            self.path.extend(self.server.graph, self.server.rng)
+            self.path.extend(self.server.metagraph, self.server.rng)
 
         return self.path.nodes[self.position]
 

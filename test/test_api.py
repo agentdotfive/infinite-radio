@@ -17,7 +17,7 @@ class MockMetagraph:
 
     def select_next_node(self, node, rng):
         curr_path, index, _ = node
-        return (curr_path, index + 1, self.mock_paths[index + 1])
+        return (curr_path, index + 1, self.mock_paths[curr_path][index + 1])
 
 
 class TestAPI(unittest.TestCase):
@@ -35,7 +35,9 @@ class TestAPI(unittest.TestCase):
             _, _, j = stream_a.next()
             self.assertEqual(i, j)
             _, _, k = stream_b.next()
-            self.assertEqual(i, k + 10)
+            self.assertEqual(i + 10, k)
 
-        self.assertEqual(stream_a.history, list(range(0, 10)))
-        self.assertEqual(stream_b.history, list(range(10, 20)))
+        self.assertEqual([x for _, _, x in stream_a.get_history()],
+                         list(range(0, 10)))
+        self.assertEqual([x for _, _, x in stream_b.get_history()],
+                         list(range(10, 20)))
