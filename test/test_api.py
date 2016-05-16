@@ -17,29 +17,27 @@ class MockMetagraph:
 
     def select_next_node(self, node, rng):
         curr_path, index, _ = node
-        return (curr_path, index + 1, self.mock_paths[index + 1])
+        return (curr_path, index + 1, self.mock_paths[curr_path][index + 1])
 
 
 class TestAPI(unittest.TestCase):
 
-    def test_hello_world(self):
-        self.assertEqual(infradio.hello_world(), 0)
-
-    def test_new_stream(self):
-
-        # TODO: Turn back on
-        if True:
-            return
+    def test_new_streams(self):
 
         metagraph = MockMetagraph([list(range(0, 10)),
                                    list(range(10, 20))])
 
-        metaserver = infradio.create_metaserver(metagraph)
-        metastream_a = metaserver.new_metastream()
-        metastream_b = metaserver.new_metastream()
+        metaserver = infradio.MetaServer(metagraph, 0)
+        stream_a = metaserver.new_stream()
+        stream_b = metaserver.new_stream()
 
         for i in range(0, 10):
-            _, _, j = metastream_a.next()
+            _, _, j = stream_a.next()
             self.assertEqual(i, j)
-            _, _, k = metastream_b.next()
-            self.assertEqual(i, k + 10)
+            _, _, k = stream_b.next()
+            self.assertEqual(i + 10, k)
+
+        self.assertEqual([x for _, _, x in stream_a.get_history()],
+                         list(range(0, 10)))
+        self.assertEqual([x for _, _, x in stream_b.get_history()],
+                         list(range(10, 20)))
