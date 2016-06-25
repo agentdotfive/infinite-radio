@@ -5,3 +5,4 @@ __pycache__/
 *.py[cod]
 venv/
 __git__.json
+.test_environment

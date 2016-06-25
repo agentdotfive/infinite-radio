@@ -2,6 +2,7 @@
 
 import unittest
 import infradio
+import os
 
 
 class MockMetagraph:
@@ -41,3 +42,17 @@ class TestAPI(unittest.TestCase):
                          list(range(0, 10)))
         self.assertEqual([x for _, _, x in stream_b.get_history()],
                          list(range(10, 20)))
+
+
+class TestGoogleAPI(unittest.TestCase):
+
+    def test_google_login(self):
+
+        google_username = os.environ['INFRADIO_TEST_GOOGLE_USERNAME']
+        google_password = os.environ['INFRADIO_TEST_GOOGLE_PASSWORD']
+
+        from gmusicapi import Mobileclient
+
+        api = Mobileclient()
+        self.assertTrue(api.login(google_username, google_password,
+                                  Mobileclient.FROM_MAC_ADDRESS))
