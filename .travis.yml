@@ -4,6 +4,9 @@ os:
 #  - osx
 python:
   - "3.4"
+before_install:
+- "sudo apt-get -qq update"
+- "sudo apt-get install -y build-essential libssl-dev libffi-dev python3-dev"
 # command to install dependencies
 install: "pip install -r python3_requirements.txt"
 # command to run tests
