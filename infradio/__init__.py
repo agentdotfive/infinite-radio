@@ -3,6 +3,7 @@ import os
 import json
 
 from .api import *  # noqa
+from .google_metagraph import GoogleMetagraph  # noqa
 
 __version__ = "1.0.0-pre"
 

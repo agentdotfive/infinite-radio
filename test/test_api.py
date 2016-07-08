@@ -3,6 +3,7 @@
 import unittest
 import infradio
 import os
+import random
 
 
 class MockMetagraph:
@@ -46,7 +47,7 @@ class TestAPI(unittest.TestCase):
 
 class TestGoogleAPI(unittest.TestCase):
 
-    def test_google_login(self):
+    def setUp(self):
 
         google_username = os.environ['INFRADIO_TEST_GOOGLE_USERNAME']
         google_password = os.environ['INFRADIO_TEST_GOOGLE_PASSWORD']
@@ -56,3 +57,17 @@ class TestGoogleAPI(unittest.TestCase):
         api = Mobileclient()
         self.assertTrue(api.login(google_username, google_password,
                                   Mobileclient.FROM_MAC_ADDRESS))
+
+        self.api = api
+
+    def test_google_metagraph(self):
+
+        metagraph = infradio.GoogleMetagraph(self.api)
+
+        rng = random.Random(0)
+
+        node = metagraph.select_node(rng)
+
+        for i in range(0, 10):
+            self.assertTrue(node.song is not None)
+            node = metagraph.select_next_node(node, rng)
